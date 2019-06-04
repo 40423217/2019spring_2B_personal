@@ -1,0 +1,17 @@
+local gkeys = require("gkeys")
+
+function love.load()
+	gkeys.start()
+end
+
+function love.gkeypressed(key)
+	print("DOWN:", key)
+end
+
+function love.gkeyreleased(key)
+	print("UP:", key)
+end
+
+function love.update(dt)
+	gkeys.update()
+end
