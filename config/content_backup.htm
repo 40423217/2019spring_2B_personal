@@ -37,16 +37,32 @@
 <p><a href="https://youtu.be/WsVKbFn0rT0">國立虎尾科技大學_機械設計工程系_40423217_Football_Table_Onshape_module_Fall</a></p>
 <p><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/w/7547fa5146549789dbd934af/e/399e742d533f4474cf84d8d2">Onshape_針對模擬簡化後的模型</a></p>
 </blockquote>
-<p>Step2：Body is dynamic 運動控制</p>
+<p><strong>Step2：Object 物件關係</strong></p>
 <blockquote>
-<p>簡化後的模型已經建立完成並且匯入 V-rep ，即進入第二階段運動控制。如何透過程式控制物件行對應需求的控制即反映。</p>
+<p>簡化後的模型已經建立完成並且匯入 V-rep ，即進入第二階段物件關系。</p>
 <p>根據 BubbleRob_Tutorial 的操作過程熟悉 V-rep 物件關聯性之於物件本身的控制關係，以及其對於體積以及重量，關係於彼此物件連結的問定性及可靠性。</p>
 <p>針對 V-rep Football table 在放置球員時，當同一桿件玉放置多個球員時，起初物件較小遂不明顯，物件勳可以穩定的置於桿件上。但隨著接後的模擬針對簡化後的模型做些調整，除外型曲面的擊球面被修正，因為有機會在擊球時和傾斜的球檯面，受力形成運動死點而將球咬住；再者大小本身也增加了些，目的是除了在程式端增加擊球力道外，亦可透過球員本身的長度產生力矩上的助力。</p>
 <p><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/v/cba6f5ae1ab6c459f2a77db7/e/399e742d533f4474cf84d8d2">Onshape_Football_table_V9</a> 修正前</p>
 <p><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/w/7547fa5146549789dbd934af/e/399e742d533f4474cf84d8d2">Onshape_Football_table_B2_V13</a> 修正後</p>
 <p>綜合上述兩部分修正，已較前一版本球員要來的大。在放置於求桿上時，出現了問題。球桿的體積對應其重量在模擬環境中，無法撐起所放置的球員數量。透過觀察亦可發現當放置的球員樹為奇數時，中間的球員為支撐的支點，而兩側的球員亦是和球桿呈現組立(接觸)關係，再者以中間球員為支點呈槓桿關係。</p>
+<p><a href="/get_page/%E5%9F%B7%E8%A1%8C%E8%A6%8F%E5%8A%83/EIRbet6Hqx8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_增加球員&amp;PID運動控制調整_2019-0606-1135</a></p>
+<p>參見應連結 04：00 段落敘述錯誤，支點球員質量必須大於其餘兩側球員質量，且其落差必須接近2^8倍(一側為2^8倍，另一次即為(2^-1)^8倍)。</p>
 </blockquote>
-<p></p><h2>手足球系統模擬</h2>
+<p><strong>Step3：Body is dynamic 運動控制</strong></p>
+<blockquote>
+<p>物件關係建構完成後，如何透過程式控制物件行對應需求的控制即反映。</p>
+<p>透過條件判斷搭配鍵盤控制。</p>
+<p>完整程式參見個人倉儲 Issue</p>
+<p><code>function sysCall_init()</code><br/><code> forward_back_player= sim.getObjectHandle('Revolute_joint_A')</code><br/><code>-- forward_back_player= sim.getObjectHandle('Revolute_joint0')</code><br/><code>-- forward_back_player= sim.getObjectHandle('Revolute_joint1')</code></p>
+<p><code>right_left_handle= sim.getObjectHandle('Prismatic_joint_A')</code><br/><code>--MaxVel=20</code><br/><code>--MaxAng=40</code><br/><code> MaxPos=0.170</code><br/><code> -- right_left_velocity=0</code><br/><code> right_left_position=0</code><br/><code> -- forward_back_velocity=0</code><br/><code> forward_back_position=0</code><br/><code>-- up_down_velocity=0</code><br/><code> dVel1=5;</code><br/><code> dVel2=10;</code><br/><code> dp=1;</code><br/><code> sim.setJointTargetPosition(forward_back_player,forward_back_position)</code><br/><code>-- sim.setJointTargetVelocity(forward_back_player,forward_back_velocity)</code><br/><code>-- sim.setJointTargetVelocity(up_down_handle,up_down_velocity)</code><br/><code> sim.setJointTargetPosition(right_left_handle,right_left_position)</code><br/><code>-- sim.setJointTargetVelocity(right_left_handle,right_left_velocity)</code><br/><code>end</code></p>
+<p><code>function sysCall_actuation()</code><br/><code> message,auxiliaryData=sim.getSimulatorMessage()</code><br/><code> while message~=-1 do</code><br/><code> if (message==sim.message_keypress) then</code><br/><code> if (auxiliaryData[1]==32) then --According to ASCII Table key[32] is space key. Press space key stop all actions.</code><br/><code>-- right key</code><br/><code> right_left_position=0</code><br/><code> -- right_left_velocity=0</code><br/><code> forward_back_position=0</code><br/><code>-- forward_back_velocity=0</code><br/><code> sim.setJointForce(forward_back_player, 0)</code><br/><code>-- sim.setJointForce(up_down_handle, 0)</code><br/><code> sim.setJointForce(right_left_handle, 0)</code><br/><code> break</code><br/><code> else</code><br/><code> sim.setJointForce(forward_back_player, 1000000) --The force of hit the ball.</code><br/><code> sim.setJointForce(right_left_handle, 1)</code><br/><code> end</code></p>
+<p><code>if (auxiliaryData[1]==2007) then</code><br/><code>-- up key</code><br/><code> forward_back_position=7</code><br/><code> -- forward_back_velocity=dVel1*10</code><br/><code>-- up_down_velocity=dVel1*10</code><br/><code> --right_left_velocity=right_left_velocity+dVel1*1.3</code><br/><code> end</code></p>
+<p><code>if (auxiliaryData[1]==2008) then</code><br/><code>-- down key</code><br/><code> forward_back_position=-7</code><br/><code> -- forward_back_velocity=-dVel1*10</code><br/><code>-- up_down_velocity=-dVel1*10</code><br/><code> --right_left_velocity=right_left_velocity-dVel1*1.3</code><br/><code> end</code></p>
+<p><br/><code> if (auxiliaryData[1]==2009) then</code><br/><code>-- left key</code><br/><code> right_left_position=right_left_position+dp*0.02</code><br/><code> -- right_left_velocity=dVel2/0.0025</code><br/><code> --up_down_velocity=up_down_velocity+dVel2/0.5</code><br/><code> end</code></p>
+<p><code>if (auxiliaryData[1]==2010) then</code><br/><code>-- right key</code><br/><code> right_left_position=right_left_position+dp*-.02</code><br/><code> -- right_left_velocity=-dVel2/0.0025</code><br/><code> --up_down_velocity=up_down_velocity-dVel2/0.5</code><br/><code> end</code></p>
+<p><code>end</code><br/><code> message,auxiliaryData=sim.getSimulatorMessage()</code><br/><code> end</code></p>
+<p><code>if right_left_position&gt;MaxPos then</code><br/><code> right_left_position=0.165</code><br/><code> end</code><br/><code> if right_left_position&lt;-MaxPos then</code><br/><code> right_left_position=-0.165</code><br/><code> end</code><br/> <br/><code>-- if right_left_velocity&gt;MaxVel then</code><br/><code>-- right_left_velocity=-5</code><br/><code>-- end</code><br/><code>-- if right_left_velocity&lt;-MaxVel then</code><br/><code>-- right_left_velocity=5</code><br/><code>-- end</code><br/><code>-- if up_down_velocity&gt;MaxVel then</code><br/><code>-- up_down_velocity=-50</code><br/><code>-- end</code><br/><code>-- if up_down_velocity&lt;-MaxVel then</code><br/><code>-- up_down_velocity=50</code><br/><code>-- end</code><br/><code> sim.setJointTargetPosition(right_left_handle,right_left_position)</code><br/><code> -- sim.setJointTargetVelocity(right_left_handle,right_left_velocity)</code><br/><code> sim.setJointTargetPosition(forward_back_player,forward_back_position)</code><br/><code>-- sim.setJointTargetVelocity(forward_back_player,forward_back_velocity)</code><br/><code>-- sim.setJointTargetVelocity(up_down_handle,up_down_velocity)</code><br/><code>end</code></p>
+</blockquote><h2>手足球系統模擬</h2>
 <p>專案成果摘要</p>
 <p>專案執行動機</p>
 <p>相關文獻探討</p>
