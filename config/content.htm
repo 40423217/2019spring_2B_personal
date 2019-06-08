@@ -52,8 +52,15 @@
 <blockquote>
 <p>物件關係建構完成後，如何透過程式控制物件行對應需求的控制即反映。</p>
 <p>透過條件判斷搭配鍵盤控制。</p>
+<p>原先參照的球員左右移動為速度控制，其所控制方式為速度疊加</p>
+<p><code>if (auxiliaryData[1]==2009) then right_left_velocity=dVel2/0.0025</code></p>
+<p><code>if (auxiliaryData[1]==2010) then right_left_velocity=-dVel2/0.0025</code></p>
+<p><code>即隨觸鍵次數對速度做累進，剎車亦然(其實沒所謂的剎車</code><code>，僅是以反方向做速度遞減，若要停止遞進需觸及空白鍵停止一切運動狀態)，儘管在其後亦有條件宣告速度上限，但是在對於球員操作上仍然不夠直觀，之餘操作者可以控制球員停滯的區間不夠安定。遂採用位置不盡方式取代速度遞進控制，鎖住之於個點位置移動的快慢，操作者若需要更加得快速到達預想的位置</code><code>，則可以透過觸鍵頻率的增減決定。</code></p>
+<p><a href="https://youtu.be/sk-plWRagRY">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_Football_table_P0_R2_V5_2019-0604-1725(音量調整)</a></p>
+<p>造因於球員本身的碰撞設定和球檯重疊，遂球員移動若未設定邊界，其在接觸球檯時會產生 V-rep 物理引擎運算碰撞造成的物件不穩定性，因此設定超出移動邊界時回到遽距離球檯壁面仍可以保持 0.05m 的間隙。</p>
+<p><a href="/get_page/%E5%9F%B7%E8%A1%8C%E8%A6%8F%E5%8A%83/6Az6APmCeH8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V5_運動控制修正_2019-0605-0002(音量調整)</a></p>
 <p><a href="https://youtu.be/TJR5onWZKzI">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_2019-0606-1630</a></p>
-<p>完整程式參見個人倉儲 Issue</p>
+<p>完整程式參見個人倉儲 <a href="https://github.com/40423217/2019spring_2B_personal/issues/1">issues</a>。</p>
 <p><code>function sysCall_init()</code><br/><code> forward_back_player= sim.getObjectHandle('Revolute_joint_A')</code><br/><code>-- forward_back_player= sim.getObjectHandle('Revolute_joint0')</code><br/><code>-- forward_back_player= sim.getObjectHandle('Revolute_joint1')</code></p>
 <p><code>right_left_handle= sim.getObjectHandle('Prismatic_joint_A')</code><br/><code>--MaxVel=20</code><br/><code>--MaxAng=40</code><br/><code> MaxPos=0.170</code><br/><code> -- right_left_velocity=0</code><br/><code> right_left_position=0</code><br/><code> -- forward_back_velocity=0</code><br/><code> forward_back_position=0</code><br/><code>-- up_down_velocity=0</code><br/><code> dVel1=5;</code><br/><code> dVel2=10;</code><br/><code> dp=1;</code><br/><code> sim.setJointTargetPosition(forward_back_player,forward_back_position)</code><br/><code>-- sim.setJointTargetVelocity(forward_back_player,forward_back_velocity)</code><br/><code>-- sim.setJointTargetVelocity(up_down_handle,up_down_velocity)</code><br/><code> sim.setJointTargetPosition(right_left_handle,right_left_position)</code><br/><code>-- sim.setJointTargetVelocity(right_left_handle,right_left_velocity)</code><br/><code>end</code></p>
 <p><code>function sysCall_actuation()</code><br/><code> message,auxiliaryData=sim.getSimulatorMessage()</code><br/><code> while message~=-1 do</code><br/><code> if (message==sim.message_keypress) then</code><br/><code> if (auxiliaryData[1]==32) then --According to ASCII Table key[32] is space key. Press space key stop all actions.</code><br/><code>-- right key</code><br/><code> right_left_position=0</code><br/><code> -- right_left_velocity=0</code><br/><code> forward_back_position=0</code><br/><code>-- forward_back_velocity=0</code><br/><code> sim.setJointForce(forward_back_player, 0)</code><br/><code>-- sim.setJointForce(up_down_handle, 0)</code><br/><code> sim.setJointForce(right_left_handle, 0)</code><br/><code> break</code><br/><code> else</code><br/><code> sim.setJointForce(forward_back_player, 1000000) --The force of hit the ball.</code><br/><code> sim.setJointForce(right_left_handle, 1)</code><br/><code> end</code></p>
