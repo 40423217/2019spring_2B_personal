@@ -1,31 +1,10 @@
 <h1>期末報告總攬</h1>
 <p>本期末報告總結於於期中操作之V-rep BubbleRob Tutorial 以及本學期 Football table 專案。透過上述兩專案的執行過程中，利用協同及可攜工具進行機械設計，如：Onshape、Github、Ungit、小組 CMSfly等工具。</p>
-<p>不需要個別對協同工具去做介紹，說明該項工具在此專案操作的問題，或是延伸的理解。</p>
-<blockquote>
-<p>/**</p>
-<p>Onshape：<br/>行專案協同繪圖，可有效地取代複雜且難取得的坊間繪圖軟體。在學期間專案並沒有受制於保密或專利等約束，遂在雲端免費且開源的平台上，可有效的且有彈性的操作，不須存檔且隨時隨地即可檢視、編輯(此為網際網路穩定區域)，另立分支邀請夥伴，匯入、匯出等等，甚至可以自行為需要功能進行補充。<br/>僅管免費註冊帳好本身並未受到個人化的保護，擁有連結或是透過 public chnnal 找到專案的使用者，也只能進行檢視，無法參與編輯。</p>
-<p>**/</p>
-</blockquote>
-<p>Github 和 Ungit：</p>
-<p></p>
-<p>專案一：Football table</p>
-<p>專案二：Routh sweeping robot 由 BubbleRob Tutorial 自行延伸</p>
-<p>各組員必須在 W17 上課之前完成期末報告簡報影片上傳與連結, 並放入本網站之"專案口頭簡報"頁面.</p>
-<p>各組必須在 W17 上課之前完成分組期末報告 pdf 檔案, 上傳至各分組的倉儲中, 並將連結提供至本網站之"專案報告書"頁面.</p>
-<p>期末報告期間每週對各成員之評分依據下列要項:</p>
-<ol>
-<li>各組員在各分組網站中所呈現之任務執行內容, 並拍攝操作影音 mp4, 將影片標題署名"國立虎尾科技大學-機械設計工程系-協同產品設計實習 B - 學號及影片主題" 後上傳, 並將影片嵌入本網站各章節頁面中.</li>
-<li>每組將提供組長本網站倉儲協同管理權, 專門處理各組員在各分支或 master 分支中的 pull requests, 各組員必須透過以 bg1, bg2 .... 命名之分支對本倉儲改版, 確定內容無誤後, 再設法由組長處理各 pull requests 之內容合併, Github Pages 將設為與 master 分支對應, 各組員之評分將依據各 pull requests 中所列出之學號與內容判定.</li>
-<li>請各組員勿將影片檔、圖片檔案或各式檔案送至本倉儲, 影片檔案請上傳至 Youtube, 圖片檔案請送至各組倉儲網站, 各式檔案則請送至各組員 Google Drive 區, 並以嵌入 (iframe), 將影片放入本網站, 其餘圖片或檔案則透過 img 或 a 標註放入各相關頁面.</li>
-</ol>
-<h4>2b 分組倉儲</h4>
-<p><a href="https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g1">https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g1</a>  (<a href="https://mdekmol.github.io/cd2019b-task1-2019cdb_t1_g1">2bg1</a>)</p>
-<p><a href="https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g2">https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g2</a>  (<a href="https://mdekmol.github.io/cd2019b-task1-2019cdb_t1_g2">2bg2</a>)</p>
-<p><a href="https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g3_1">https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g3_1</a> (<a href="https://mdekmol.github.io/cd2019b-task1-2019cdb_t1_g3_1">2bg3</a>)</p>
-<p><a href="https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g4">https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g4</a>  (<a href="https://mdekmol.github.io/cd2019b-task1-2019cdb_t1_g4">2bg4</a>)</p>
-<p><a href="https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g5">https://github.com/mdekmol/cd2019b-task1-2019cdb_t1_g5</a> (<a href="https://mdekmol.github.io/cd2019b-task1-2019cdb_t1_g5">2bg5</a>)</p>
-<p></p>
-<h1>執行規劃</h1>
+<p>V-rep 進行運動模擬，在其建構的物理引擎環境裡，對物件的動態鋼體機構模擬。本學期所進行的操作過程中，之於理解範圍所能調整的物件條件，仍然處於半猜測的推敲對應其環境的運動狀態，儘管是對物件的體積、重量和物件特徵進行斟酌，當中的修正大部分並非對應其在實際環境狀態中的設計，而是針對其在 V-rep物理引擎中的客製。</p>
+<p>遂當中可行在實際作棟的部分，為控制物件的程式。整體而言操作的物理特性模擬是充滿問題的，一來是關於軟體操作半學期下來仍然不熟悉；二則是關於所能直觀控制的條件太少，以及其在逐步的設定對物理性質、材料、物件狀態等等細分的諸多，無法逐一設定。</p>
+<p>Onshape 進行協同繪圖。利用其軟體特性，使得在操作該軟體時不被場域裝置的限制，可在有網際網路的地方繪圖(這也許是他唯一的限制)，和駔大型專案時可以即時的分享連結，進行雙向對單一專案(物件)的溝通，使過往僅能透過截圖、畫面分享等單向作法對遠距離進行合作，算是另一種打破距離限制的協同工具。</p>
+<p>其特性在於可以有效且明確(圖像化)的呈現版本歷程資訊，可以有效地在合作過程中檢視，亦可在設計方向出錯當下及時止血或是回到當前進行切換分之。目前可所接觸的 git 工具最大的不同在於無法進行 pull request，遂專案分支就目前的 Onshape 版本只會越切越多的分支，屆時像是倒著長出的樹根。</p>
+<p></p><h1>執行規劃</h1>
 <p>按照工業設計中的描述性設計流程，在街道專案的第一步先來定義這是是否為定義完善的問題。檢視整體手足球的專案需求，為一定義不完善的問題，一來規格不明確，二來雖有指定軟體或建議工具，單騎使用的方法以及呈現的展演未被宣告，遂為一定義不完善問題。</p>
 <p>概略的規格及參考專利在：<a href="https://2019wcm.blogspot.com/search/label/foosball">Table Foosball 動態系統模擬專案</a></p>
 <p><strong>Step1：Rough Modeling 針對功能性和需要的輪廓進行概略性的建模</strong></p>
@@ -138,7 +117,8 @@
 <p><a href="https://youtu.be/EIRbet6Hqx8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_增加球員&amp;PID運動控制調整_2019-0606-1135</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/EIRbet6Hqx8" width="500"></iframe></p>
 <p>參見應連結 04：00 段落敘述錯誤，支點球員質量必須大於其餘兩側球員質量，且其落差必須接近2^8倍(一側為2^8倍，另一次即為(2^-1)^8倍)。</p>
-</blockquote><h2>參數設計與繪圖</h2>
+</blockquote>
+<h2>參數設計與繪圖</h2>
 <p>手足球系統的零組件參數設計與繪圖 (零組件初步設計繪圖)</p>
 <p>本章節延續前章節 <strong>Step2：Object 物件關系</strong></p>
 <p><strong><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/w/7547fa5146549789dbd934af/e/399e742d533f4474cf84d8d2">Onshape_Football_table_V13</a> </strong></p>
@@ -180,7 +160,8 @@
 <p><a href="https://youtu.be/6Az6APmCeH8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V5_運動控制修正_2019-0605-0002(音量調整)</a> </p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/6Az6APmCeH8" width="500"></iframe></p>
 <p></p>
-</blockquote><h3>B3 修正</h3>
+</blockquote>
+<h3>B3 修正</h3>
 <h2>細部設計與 BOM</h2>
 <h4>手足球零件格式說明</h4>
 <p>手足球零件格式說明</p>
@@ -206,7 +187,8 @@
 <p><a href="https://youtu.be/nOUtxxKiWL0">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_Gripper_2019-0611-2100</a> </p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/nOUtxxKiWL0" width="500"></iframe></p>
 </blockquote>
-<p></p><h2>系統功能展示</h2>
+<p></p>
+<h2>系統功能展示</h2>
 <p><strong>手足球模擬系統功能展示 (模擬展示與說明影片)</strong></p>
 <p>透過條件判斷搭配鍵盤控制。</p>
 <p><span>原先參照的球員左右移動為速度控制，其所控制方式為速度疊加(段落程式如下)</span></p>
