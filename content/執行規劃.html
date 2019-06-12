@@ -150,51 +150,42 @@ init_mathjax();
     <div id="tipue_search_content">期末報告總攬 << <a href='期末報告總攬.html'>Previous</a> <a href='手足球系統模擬.html'>Next</a> >> 手足球系統模擬<br /><h1>執行規劃</h1>
 <p>按照工業設計中的描述性設計流程，在街道專案的第一步先來定義這是是否為定義完善的問題。檢視整體手足球的專案需求，為一定義不完善的問題，一來規格不明確，二來雖有指定軟體或建議工具，單騎使用的方法以及呈現的展演未被宣告，遂為一定義不完善問題。</p>
 <p>概略的規格及參考專利在：<a href="https://2019wcm.blogspot.com/search/label/foosball">Table Foosball 動態系統模擬專案</a></p>
-<p><strong>Step1：Rough Modeling 針對功能性和需要的輪廓進行概略性的建模</strong></p>
+<p><strong>Step1：問題</strong></p>
 <blockquote>
-<p>建置必要的模型，如球檯、球員、球桿、球(可由V-rep進行直接新增)。</p>
-<p>過去學習歷程養成的壞習慣，導致一開始盲目地對著規格定義不明確的工程圖套描，沒有進一步的思考究竟現階段出現模型的目的。在該階段之所以需要模型，源自因為需要可以進行模擬控制的實體，遂模型本身並非主體，而是要能夠搭配V-rep進行物件環境碰撞、程式控制等模擬。</p>
-<p>按照課程所提供不完整的規格工程圖建模完成之物件，一來會發現其本身提供的史寸步完善，二來再匯入V-rep 進行模擬後尤其進入 Object Proterties 下的 Body is Dynamic 時，物間開始就其體積對應的重量，在環境產身對應的物理量並且和他物件產生碰撞(含接觸)時，軟體的附載會急遽增加。原因來自於 V-rep和所接觸的 CAE 軟體，物件匯入的方式類似，透過將物件進行網格切割並且，對每個網格進行有限元素等參數計算，行而可在環境中獲得對應條件的狀態。</p>
-<p>此種方式會受到模型特徵影響甚遽，物件本身過於複雜之外行如圓角、曲面或甚至是段距離內的特徵扭曲，都可能造成網格切割不完整甚至是轉換成 STL 時形成破面件(壁厚等於 0 的物件)。因此針對不同條件及想要獲得的不同結果，在進行類同於有限元素分析或是鋼體運動模擬等作業時，會針對物件功能對應條件行模型簡化。</p>
-<p>詳細建模過程可參考下一張連結：</p>
-<p><a href="https://youtu.be/WsVKbFn0rT0">國立虎尾科技大學_機械設計工程系_40423217_Football_Table_Onshape_module_Fall</a></p>
-<p><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/w/7547fa5146549789dbd934af/e/399e742d533f4474cf84d8d2">Onshape_針對模擬簡化後的模型</a></p>
+<p>檢視整體手足球的專案需求，為一定義不完善的問題，一來規格不明確，二來雖有指定軟體或建議工具，單騎使用的方法以及呈現的展演未被宣告，遂為一定義不完善問題。</p>
+<p>瞭解為定義不完善問題後列出需求，以及待釐清項目：</p>
+<p style="padding-left: 30px;">手足球功能？</p>
+<p style="padding-left: 30px;">操作者該控制的方式以及項目？</p>
+<p style="padding-left: 30px;">球檯、球員和球的關係？</p>
+<p style="padding-left: 30px;">如何給球以及接球(只離開球檯後)？</p>
+<p style="padding-left: 30px;">虛擬環境中如何模擬？</p>
 </blockquote>
-<p><strong>Step2：Object 物件關係</strong></p>
-<blockquote>
-<p>簡化後的模型已經建立完成並且匯入 V-rep ，即進入第二階段物件關系。</p>
-<p>根據 BubbleRob_Tutorial 的操作過程熟悉 V-rep 物件關聯性之於物件本身的控制關係，以及其對於體積以及重量，關係於彼此物件連結的問定性及可靠性。</p>
-<p>針對 V-rep Football table 在放置球員時，當同一桿件玉放置多個球員時，起初物件較小遂不明顯，物件勳可以穩定的置於桿件上。但隨著接後的模擬針對簡化後的模型做些調整，除外型曲面的擊球面被修正，因為有機會在擊球時和傾斜的球檯面，受力形成運動死點而將球咬住；再者大小本身也增加了些，目的是除了在程式端增加擊球力道外，亦可透過球員本身的長度產生力矩上的助力。</p>
-<p><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/v/cba6f5ae1ab6c459f2a77db7/e/399e742d533f4474cf84d8d2">Onshape_Football_table_V9</a> 修正前</p>
-<p><a href="https://cad.onshape.com/documents/5a59c9c739e3ae2de7916f88/w/7547fa5146549789dbd934af/e/399e742d533f4474cf84d8d2">Onshape_Football_table_B2_V13</a> 修正後</p>
-<p>綜合上述兩部分修正，已較前一版本球員要來的大。在放置於求桿上時，出現了問題。球桿的體積對應其重量在模擬環境中，無法撐起所放置的球員數量。透過觀察亦可發現當放置的球員樹為奇數時，中間的球員為支撐的支點，而兩側的球員亦是和球桿呈現組立(接觸)關係，再者以中間球員為支點呈槓桿關係。</p>
-<p><a href="/get_page/%E5%9F%B7%E8%A1%8C%E8%A6%8F%E5%8A%83/EIRbet6Hqx8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_增加球員&amp;PID運動控制調整_2019-0606-1135</a></p>
-<p>參見應連結 04：00 段落敘述錯誤，支點球員質量必須大於其餘兩側球員質量，且其落差必須接近2^8倍(一側為2^8倍，另一次即為(2^-1)^8倍)。</p>
-</blockquote>
-<p><strong>Step3：Body is dynamic 運動控制</strong></p>
-<blockquote>
-<p>物件關係建構完成後，如何透過程式控制物件行對應需求的控制即反映。</p>
-<p>透過條件判斷搭配鍵盤控制。</p>
-<p>原先參照的球員左右移動為速度控制，其所控制方式為速度疊加</p>
-<p><code>if (auxiliaryData[1]==2009) then right_left_velocity=dVel2/0.0025</code></p>
-<p><code>if (auxiliaryData[1]==2010) then right_left_velocity=-dVel2/0.0025</code></p>
-<p><code>即隨觸鍵次數對速度做累進，剎車亦然(其實沒所謂的剎車</code><code>，僅是以反方向做速度遞減，若要停止遞進需觸及空白鍵停止一切運動狀態)，儘管在其後亦有條件宣告速度上限，但是在對於球員操作上仍然不夠直觀，之餘操作者可以控制球員停滯的區間不夠安定。遂採用位置不盡方式取代速度遞進控制，鎖住之於個點位置移動的快慢，操作者若需要更加得快速到達預想的位置</code><code>，則可以透過觸鍵頻率的增減決定。</code></p>
-<p><a href="https://youtu.be/sk-plWRagRY">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_Football_table_P0_R2_V5_2019-0604-1725(音量調整)</a></p>
-<p>造因於球員本身的碰撞設定和球檯重疊，遂球員移動若未設定邊界，其在接觸球檯時會產生 V-rep 物理引擎運算碰撞造成的物件不穩定性，因此設定超出移動邊界時回到遽距離球檯壁面仍可以保持 0.05m 的間隙。</p>
-<p><a href="/get_page/%E5%9F%B7%E8%A1%8C%E8%A6%8F%E5%8A%83/6Az6APmCeH8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V5_運動控制修正_2019-0605-0002(音量調整)</a></p>
-<p><a href="https://youtu.be/TJR5onWZKzI">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_2019-0606-1630</a></p>
-<p>完整程式參見個人倉儲 <a href="https://github.com/40423217/2019spring_2B_personal/issues/1">issues</a>。</p>
-<p><code>function sysCall_init()</code><br/><code> forward_back_player= sim.getObjectHandle('Revolute_joint_A')</code><br/><code>-- forward_back_player= sim.getObjectHandle('Revolute_joint0')</code><br/><code>-- forward_back_player= sim.getObjectHandle('Revolute_joint1')</code></p>
-<p><code>right_left_handle= sim.getObjectHandle('Prismatic_joint_A')</code><br/><code>--MaxVel=20</code><br/><code>--MaxAng=40</code><br/><code> MaxPos=0.170</code><br/><code> -- right_left_velocity=0</code><br/><code> right_left_position=0</code><br/><code> -- forward_back_velocity=0</code><br/><code> forward_back_position=0</code><br/><code>-- up_down_velocity=0</code><br/><code> dVel1=5;</code><br/><code> dVel2=10;</code><br/><code> dp=1;</code><br/><code> sim.setJointTargetPosition(forward_back_player,forward_back_position)</code><br/><code>-- sim.setJointTargetVelocity(forward_back_player,forward_back_velocity)</code><br/><code>-- sim.setJointTargetVelocity(up_down_handle,up_down_velocity)</code><br/><code> sim.setJointTargetPosition(right_left_handle,right_left_position)</code><br/><code>-- sim.setJointTargetVelocity(right_left_handle,right_left_velocity)</code><br/><code>end</code></p>
-<p><code>function sysCall_actuation()</code><br/><code> message,auxiliaryData=sim.getSimulatorMessage()</code><br/><code> while message~=-1 do</code><br/><code> if (message==sim.message_keypress) then</code><br/><code> if (auxiliaryData[1]==32) then --According to ASCII Table key[32] is space key. Press space key stop all actions.</code><br/><code>-- right key</code><br/><code> right_left_position=0</code><br/><code> -- right_left_velocity=0</code><br/><code> forward_back_position=0</code><br/><code>-- forward_back_velocity=0</code><br/><code> sim.setJointForce(forward_back_player, 0)</code><br/><code>-- sim.setJointForce(up_down_handle, 0)</code><br/><code> sim.setJointForce(right_left_handle, 0)</code><br/><code> break</code><br/><code> else</code><br/><code> sim.setJointForce(forward_back_player, 1000000) --The force of hit the ball.</code><br/><code> sim.setJointForce(right_left_handle, 1)</code><br/><code> end</code></p>
-<p><code>if (auxiliaryData[1]==2007) then</code><br/><code>-- up key</code><br/><code> forward_back_position=7</code><br/><code> -- forward_back_velocity=dVel1*10</code><br/><code>-- up_down_velocity=dVel1*10</code><br/><code> --right_left_velocity=right_left_velocity+dVel1*1.3</code><br/><code> end</code></p>
-<p><code>if (auxiliaryData[1]==2008) then</code><br/><code>-- down key</code><br/><code> forward_back_position=-7</code><br/><code> -- forward_back_velocity=-dVel1*10</code><br/><code>-- up_down_velocity=-dVel1*10</code><br/><code> --right_left_velocity=right_left_velocity-dVel1*1.3</code><br/><code> end</code></p>
-<p><br/><code> if (auxiliaryData[1]==2009) then</code><br/><code>-- left key</code><br/><code> right_left_position=right_left_position+dp*0.02</code><br/><code> -- right_left_velocity=dVel2/0.0025</code><br/><code> --up_down_velocity=up_down_velocity+dVel2/0.5</code><br/><code> end</code></p>
-<p><code>if (auxiliaryData[1]==2010) then</code><br/><code>-- right key</code><br/><code> right_left_position=right_left_position+dp*-.02</code><br/><code> -- right_left_velocity=-dVel2/0.0025</code><br/><code> --up_down_velocity=up_down_velocity-dVel2/0.5</code><br/><code> end</code></p>
-<p><code>end</code><br/><code> message,auxiliaryData=sim.getSimulatorMessage()</code><br/><code> end</code></p>
-<p><code>if right_left_position&gt;MaxPos then</code><br/><code> right_left_position=0.165</code><br/><code> end</code><br/><code> if right_left_position&lt;-MaxPos then</code><br/><code> right_left_position=-0.165</code><br/><code> end</code><br/> <br/><code>-- if right_left_velocity&gt;MaxVel then</code><br/><code>-- right_left_velocity=-5</code><br/><code>-- end</code><br/><code>-- if right_left_velocity&lt;-MaxVel then</code><br/><code>-- right_left_velocity=5</code><br/><code>-- end</code><br/><code>-- if up_down_velocity&gt;MaxVel then</code><br/><code>-- up_down_velocity=-50</code><br/><code>-- end</code><br/><code>-- if up_down_velocity&lt;-MaxVel then</code><br/><code>-- up_down_velocity=50</code><br/><code>-- end</code><br/><code> sim.setJointTargetPosition(right_left_handle,right_left_position)</code><br/><code> -- sim.setJointTargetVelocity(right_left_handle,right_left_velocity)</code><br/><code> sim.setJointTargetPosition(forward_back_player,forward_back_position)</code><br/><code>-- sim.setJointTargetVelocity(forward_back_player,forward_back_velocity)</code><br/><code>-- sim.setJointTargetVelocity(up_down_handle,up_down_velocity)</code><br/><code>end</code></p>
-</blockquote>
-<br />期末報告總攬 << <a href='期末報告總攬.html'>Previous</a> <a href='手足球系統模擬.html'>Next</a> >> 手足球系統模擬</div>
+<p><strong>Step2：說明問題</strong></p>
+<p style="padding-left: 30px;">手足球的功能？</p>
+<p style="padding-left: 60px;">透過固定在球桿上的球員進行擊球，將球擊入對手球洞即可得分，多為偶數玩家參與。球桿控制權為交錯但不干涉，隨著靠近球洞單一球桿上球員數逐漸遞減。最後守門員留有一員及對手兩員。</p>
+<p style="padding-left: 30px;">操作者能控制的項目？</p>
+<p style="padding-left: 60px;">操作者主要藉由「旋轉」或「直進」球桿，以達控制固定在上的球員，進行擊球及控球更甚者等待等動作。</p>
+<p style="padding-left: 30px;">球檯、球員和球的關係？</p>
+<p style="padding-left: 60px;">球員被固定於球桿上，而球桿本身可以在球檯上所定位的孔洞中進行直進以及旋轉。球桿運動過程中球員本身特徵輪廓等，不能和球檯面或是彼此(因為交錯控制權遂若有干涉為對手球員)進行運動干涉。球僅能在球檯所圍出的場域進行碰撞、直進，且僅能由雙方球門離開。</p>
+<p style="padding-left: 30px;"><span>如何給球以及接球(只離開球檯後)？</span></p>
+<p style="padding-left: 60px;"><span>球僅能在球檯所圍出的場域進行碰撞、直進，且僅能由雙方球門離開。遂球門後必須有裝置進行捕捉，而送球需再求球檯中間，若為同一顆球(或同一批次)則必須要有送球(含接球)等機構建置。</span></p>
+<p style="padding-left: 30px;"><span>虛擬環境中如何模擬？</span></p>
+<p style="padding-left: 60px;">Step1：Rough Modeling 針對功能性和需要的輪廓進行概略性的建模<br/>Step2：Object 物件關係<br/>Step3：Body is dynamic 運動控制</p>
+<p><strong>Step3：分解成單元</strong></p>
+<p style="padding-left: 30px;">Step1：Onshape 操作。應該是最快也最容易上手的部分，其所對應的教學影音很好懂也很多Workshop可以參考，遂要繪製手足球的各物件相對 V-rep 容易。</p>
+<p style="padding-left: 30px;">Step2：V-rep BubbleRob Tutorial 了解 V-rep 物理引擎的簡單物件設定</p>
+<p></p>
+<p><strong>以下步驟略，之於本專案的性質及其專注的重點，並未包含實體化以及差異性設計，遂以下步驟略。</strong></p>
+<p>Step4：資訊蒐集</p>
+<p>Step5：分析資訊</p>
+<p>Step6：創建</p>
+<p>Step7：材料與科技</p>
+<p>Step8：實驗</p>
+<p>Step9：模型(樣品)</p>
+<p>Step10：設計成品</p>
+<p>Step11：解決問題的想法</p>
+<p><strong></strong></p>
+<blockquote></blockquote><br />期末報告總攬 << <a href='期末報告總攬.html'>Previous</a> <a href='手足球系統模擬.html'>Next</a> >> 手足球系統模擬</div>
         
     <!-- footer -->
       <div class="container">
