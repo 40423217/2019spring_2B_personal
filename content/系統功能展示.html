@@ -149,34 +149,33 @@ init_mathjax();
         </header>
     <div id="tipue_search_content">送球機構設計與模擬 << <a href='送球機構設計與模擬.html'>Previous</a> <a href='結案報告.html'>Next</a> >> 結案報告<br /><h1>系統功能展示</h1>
 <p><strong>手足球模擬系統功能展示 (模擬展示與說明影片)</strong></p>
-<p>透過條件判斷搭配鍵盤控制。</p>
-<p><span>原先參照的球員左右移動為速度控制，其所控制方式為速度疊加(段落程式如下)</span></p>
-<blockquote>
-<p><code><span>up_down_velocity=up_down_velocity+dVel1*10</span></code></p>
-<p><code><span>up_down_velocity=up_down_velocity-dVel1*10</span></code></p>
-<p><span>即隨觸鍵次數對速度做累進，剎車亦然(其實沒所謂的剎車，僅是以反方向做速度遞減，若要停止遞進需觸及空白鍵停止一切運動狀態)，儘管在其後亦有條件宣告速度上限，但是在對於球員操作上仍然不夠直觀。在於及球有效角度的限制，其餘行程其實不必要，再加上模擬顯示對應視覺暫留，使用者無法判斷及球方向為何。遂修正由位置進行擊球控制。</span></p>
-<p><a href="https://youtu.be/G6DX4CTpv2s">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V_rep_Football_player_P0_R2_V1_2019-0530-2117</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/G6DX4CTpv2s" width="500"></iframe></p>
-<p><a href="https://youtu.be/f2QymQQiOtM">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V_rep_Football_player_P0_R2_V2_2019-0530-2234</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/f2QymQQiOtM" width="500"></iframe></p>
+<p style="padding-left: 30px;">透過條件判斷搭配鍵盤控制。</p>
+<p style="padding-left: 30px;"><span>原先參照的球員左右移動為速度控制，其所控制方式為速度疊加(段落程式如下)</span></p>
+<blockquote style="padding-left: 30px;">
+<p style="padding-left: 30px;"><code><span>up_down_velocity=up_down_velocity+dVel1*10</span></code></p>
+<p style="padding-left: 30px;"><code><span>up_down_velocity=up_down_velocity-dVel1*10</span></code></p>
+<p style="padding-left: 30px;"><span>即隨觸鍵次數對速度做累進，剎車亦然(其實沒所謂的剎車，僅是以反方向做速度遞減，若要停止遞進需觸及空白鍵停止一切運動狀態)，儘管在其後亦有條件宣告速度上限，但是在對於球員操作上仍然不夠直觀。在於及球有效角度的限制，其餘行程其實不必要，再加上模擬顯示對應視覺暫留，使用者無法判斷及球方向為何。遂修正由位置進行擊球控制。</span></p>
+<p style="padding-left: 30px;"><a href="https://youtu.be/G6DX4CTpv2s">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V_rep_Football_player_P0_R2_V1_2019-0530-2117</a></p>
+<p style="padding-left: 30px;"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/G6DX4CTpv2s" width="500"></iframe></p>
+<p style="padding-left: 30px;"><a href="https://youtu.be/f2QymQQiOtM">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V_rep_Football_player_P0_R2_V2_2019-0530-2234</a></p>
+<p style="padding-left: 30px;"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/f2QymQQiOtM" width="500"></iframe></p>
 </blockquote>
-<p>原先參照的球員左右移動為速度控制，其所控制方式為速度疊加(段落程式如下)</p>
-<blockquote>
-<p><code>if (auxiliaryData[1]==2009) then right_left_velocity=right_left_velocity+dVel2/0.0025</code></p>
-<p><code>if (auxiliaryData[1]==2010) then right_left_velocity=right_left_velocity-dVel2/0.0025</code></p>
-<p>即隨觸鍵次數對速度做累進，剎車亦然(其實沒所謂的剎車，僅是以反方向做速度遞減，若要停止遞進需觸及空白鍵停止一切運動狀態)，儘管在其後亦有條件宣告速度上限，但是在對於球員操作上仍然不夠直觀，之於操作者可以控制球員停滯的區間不夠安定。遂採用位置不盡方式取代速度遞進控制，鎖住之於個點位置移動的快慢，操作者若需要更加得快速到達預想的位置，則可以透過觸鍵頻率的增減決定。</p>
-<p><code>if (auxiliaryData[1]==2009) then right_left_position=right_left_position+dp*0.02</code></p>
-<p><code>if (auxiliaryData[1]==2010) then right_left_position=right_left_position+dp*-0.02</code></p>
-<p><a href="https://youtu.be/sk-plWRagRY">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_Football_table_P0_R2_V5_2019-0604-1725(音量調整)</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/sk-plWRagRY" width="500"></iframe></p>
-<p>造因於球員本身的碰撞設定和球檯重疊，遂球員移動若未設定邊界，其在接觸球檯時會產生 V-rep 物理引擎運算碰撞造成的物件不穩定性，因此設定超出移動邊界時回到遽距離球檯壁面仍可以保持 0.05m 的間隙。</p>
-<p><a href="https://youtu.be/6Az6APmCeH8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V5_運動控制修正_2019-0605-0002(音量調整)</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/6Az6APmCeH8" width="500"></iframe></p>
-<p><a href="https://youtu.be/TJR5onWZKzI">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_2019-0606-1630</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/TJR5onWZKzI" width="500"></iframe></p>
+<p style="padding-left: 30px;">原先參照的球員左右移動為速度控制，其所控制方式為速度疊加(段落程式如下)</p>
+<blockquote style="padding-left: 30px;">
+<p style="padding-left: 30px;"><code>if (auxiliaryData[1]==2009) then right_left_velocity=right_left_velocity+dVel2/0.0025</code></p>
+<p style="padding-left: 30px;"><code>if (auxiliaryData[1]==2010) then right_left_velocity=right_left_velocity-dVel2/0.0025</code></p>
+<p style="padding-left: 30px;">即隨觸鍵次數對速度做累進，剎車亦然(其實沒所謂的剎車，僅是以反方向做速度遞減，若要停止遞進需觸及空白鍵停止一切運動狀態)，儘管在其後亦有條件宣告速度上限，但是在對於球員操作上仍然不夠直觀，之於操作者可以控制球員停滯的區間不夠安定。遂採用位置不盡方式取代速度遞進控制，鎖住之於個點位置移動的快慢，操作者若需要更加得快速到達預想的位置，則可以透過觸鍵頻率的增減決定。</p>
+<p style="padding-left: 30px;"><code>if (auxiliaryData[1]==2009) then right_left_position=right_left_position+dp*0.02</code></p>
+<p style="padding-left: 30px;"><code>if (auxiliaryData[1]==2010) then right_left_position=right_left_position+dp*-0.02</code></p>
+<p style="padding-left: 30px;"><a href="https://youtu.be/sk-plWRagRY">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_Football_table_P0_R2_V5_2019-0604-1725(音量調整)</a></p>
+<p style="padding-left: 30px;"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/sk-plWRagRY" width="500"></iframe></p>
+<p style="padding-left: 30px;">造因於球員本身的碰撞設定和球檯重疊，遂球員移動若未設定邊界，其在接觸球檯時會產生 V-rep 物理引擎運算碰撞造成的物件不穩定性，因此設定超出移動邊界時回到遽距離球檯壁面仍可以保持 0.05m 的間隙。</p>
+<p style="padding-left: 30px;"><a href="https://youtu.be/6Az6APmCeH8">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V5_運動控制修正_2019-0605-0002(音量調整)</a></p>
+<p style="padding-left: 30px;"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/6Az6APmCeH8" width="500"></iframe></p>
+<p style="padding-left: 30px;"><a href="https://youtu.be/TJR5onWZKzI">國立虎尾科技大學_機械設計工程系_協同產品設計實習_40423217_V-rep_V-rep_Football_table_P0_R2_V6_2019-0606-1630</a></p>
+<p style="padding-left: 30px;"><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/TJR5onWZKzI" width="500"></iframe></p>
 </blockquote>
-<p><strong>完整程式參見個人倉儲 <a href="https://github.com/40423217/2019spring_2B_personal/issues/1">issues</a>。</strong></p>
-<br />送球機構設計與模擬 << <a href='送球機構設計與模擬.html'>Previous</a> <a href='結案報告.html'>Next</a> >> 結案報告</div>
+<p><strong>完整程式參見個人倉儲 <a href="https://github.com/40423217/2019spring_2B_personal/issues/1">issues</a>。</strong></p><br />送球機構設計與模擬 << <a href='送球機構設計與模擬.html'>Previous</a> <a href='結案報告.html'>Next</a> >> 結案報告</div>
         
     <!-- footer -->
       <div class="container">
